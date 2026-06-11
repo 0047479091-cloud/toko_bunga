@@ -10,15 +10,12 @@ use App\Http\Controllers\ProductController;
 |--------------------------------------------------------------------------
 */
 
-// Halaman Login
 Route::get('/', [AuthController::class, 'showLoginForm'])
     ->name('login');
 
-// Proses Login
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.process');
 
-// Logout
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 

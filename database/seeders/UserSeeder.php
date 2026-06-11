@@ -1,23 +1,15 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\User;
-use Hash:
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        //buat 1 akun admin
-        User::create([
-            'name' => 'Admin Iin's Bouquet',
-            'email' => 'admin@iinsbouquet.com',
-            'password' =>Hash::make('123456789'),
-        ]);
-    }
-}
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+User::updateOrCreate(
+    ['email' => 'admin@iinsbouquet.com'],
+    [
+        'name' => "Admin Iin's Bouquet",
+        'password' => Hash::make('12345678'),
+    ]
+);

@@ -1,88 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iin's Bouquet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Iin's Bouquet</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-body{
-    font-family:Poppins;
-    background:#f4f7ff;
-}
-.title{
-    font-family:'Dancing Script',cursive;
-    font-size:3.3rem;
-    color:#e75480;
-}
-.card-custom{
-    border:none;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-.table thead{
-    background:#6c63ff;
-    color:white;
-}
-.table tbody tr:hover{
-    background:#f8f9ff;
-}
-.btn-primary{
-    background:linear-gradient(135deg,#6c63ff,#4a90e2);
-    border:none;
-}
-.stat{
-    color:white;
-    border:none;
-    border-radius:20px;
-}
-.s1{
-    background:linear-gradient(135deg,#6c63ff,#8f94fb);
-}
-.s2{
-    background:linear-gradient(135deg,#ff6b9d,#ff9bc2);
-}
-.badge-stock{
-    background:#d1f7d6;
-    color:#0f9d58;
-    padding:6px 12px;
-    border-radius:20px;
-}
-.modal-content{
-    border:none;
-    border-radius:20px;
-}
-</style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            font-family:Poppins,sans-serif;
+            background:#f4f7ff;
+        }
+
+        .title{
+            font-family:'Dancing Script',cursive;
+            font-size:3rem;
+            color:#e75480;
+        }
+
+        .card-custom{
+            border:none;
+            border-radius:20px;
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
+        }
+
+        .table thead{
+            background:#6c63ff;
+            color:white;
+        }
+
+        .table tbody tr:hover{
+            background:#f8f9ff;
+        }
+
+        .btn-primary{
+            background:linear-gradient(135deg,#6c63ff,#4a90e2);
+            border:none;
+        }
+
+        .stat{
+            color:white;
+            border:none;
+            border-radius:20px;
+        }
+
+        .s1{
+            background:linear-gradient(135deg,#6c63ff,#8f94fb);
+        }
+
+        .s2{
+            background:linear-gradient(135deg,#ff6b9d,#ff9bc2);
+        }
+
+        .badge-stock{
+            background:#d1f7d6;
+            color:#0f9d58;
+            padding:6px 12px;
+            border-radius:20px;
+        }
+
+        .modal-content{
+            border:none;
+            border-radius:20px;
+        }
+
+        .menu-link{
+            text-decoration:none;
+            font-weight:600;
+            color:#6c63ff;
+            margin-right:25px;
+            transition:.3s;
+        }
+
+        .menu-link:hover{
+            color:#e75480;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container py-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-start mb-4">
+
+        <!-- KIRI -->
         <div>
+
             <h1 class="title">🌷 Iin's Bouquet</h1>
-            <p class="text-muted">
+
+            <p class="text-muted mb-2">
                 Fresh Flowers • Beautiful Moments • Made With Love
             </p>
+
+            <!-- MENU -->
+            <div class="mt-3">
+
+                <a href="{{ route('products.index') }}" class="menu-link">
+                    📦 Item
+                </a>
+
+                <a href="#" class="menu-link">
+                    💳 Transaksi
+                </a>
+
+            </div>
+
         </div>
 
-        <button class="btn btn-primary px-4"
+        <!-- KANAN -->
+        <div class="text-end">
+
+            <button
+                class="btn btn-primary px-4 mb-2"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTambah">
-            + Tambah Item
-        </button>
+                + Tambah Item
+            </button>
+
+            <br>
+
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn btn-danger">
+                    Logout
+                </button>
+            </form>
+
+        </div>
+
     </div>
 
+    <!-- ALERT -->
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
+    <!-- STATISTIK -->
     <div class="row mb-4">
 
         <div class="col-md-6 mb-3">
@@ -105,157 +166,163 @@ body{
 
     </div>
 
+    <!-- TABLE -->
     <div class="card card-custom">
+
         <div class="card-body">
 
             <table class="table table-hover align-middle">
 
                 <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Harga</th>
-                    <th>Stok</th>
-                    <th>Deskripsi</th>
-                    <th>Aksi</th>
-                </tr>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
+                    </tr>
                 </thead>
 
                 <tbody>
 
                 @forelse($products as $item)
 
-                <tr>
+                    <tr>
 
-                    <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loop->iteration }}</td>
 
-                    <td>
-                        <strong>{{ $item->nama_barang }}</strong>
-                    </td>
+                        <td>
+                            <strong>{{ $item->nama_barang }}</strong>
+                        </td>
 
-                    <td>
-                        Rp {{ number_format($item->harga,0,',','.') }}
-                    </td>
+                        <td>
+                            Rp {{ number_format($item->harga,0,',','.') }}
+                        </td>
 
-                    <td>
-                        <span class="badge-stock">
-                            {{ $item->stok }}
-                        </span>
-                    </td>
+                        <td>
+                            <span class="badge-stock">
+                                {{ $item->stok }}
+                            </span>
+                        </td>
 
-                    <td>{{ $item->deskripsi }}</td>
+                        <td>{{ $item->deskripsi }}</td>
 
-                    <td>
+                        <td>
 
-                        <!-- EDIT -->
-                        <button class="btn btn-warning btn-sm"
+                            <button
+                                class="btn btn-warning btn-sm"
                                 data-bs-toggle="modal"
                                 data-bs-target="#editModal{{ $item->id }}">
-                            ✏️ Edit
-                        </button>
-
-                        <!-- DELETE -->
-                        <form action="{{ route('products.destroy',$item->id) }}"
-                              method="POST"
-                              class="d-inline">
-
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin hapus data?')">
-                                🗑️ Hapus
+                                ✏️ Edit
                             </button>
 
-                        </form>
-
-                    </td>
-
-                </tr>
-
-                <!-- MODAL EDIT -->
-                <div class="modal fade"
-                     id="editModal{{ $item->id }}"
-                     tabindex="-1">
-
-                    <div class="modal-dialog">
-
-                        <div class="modal-content">
-
-                            <form action="{{ route('products.update',$item->id) }}"
-                                  method="POST">
+                            <form
+                                action="{{ route('products.destroy',$item->id) }}"
+                                method="POST"
+                                class="d-inline">
 
                                 @csrf
-                                @method('PUT')
+                                @method('DELETE')
 
-                                <div class="modal-header">
-                                    <h5>Edit Produk</h5>
-
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal">
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <input type="text"
-                                           name="nama_barang"
-                                           class="form-control mb-3"
-                                           value="{{ $item->nama_barang }}"
-                                           required>
-
-                                    <input type="number"
-                                           name="harga"
-                                           class="form-control mb-3"
-                                           value="{{ $item->harga }}"
-                                           required>
-
-                                    <input type="number"
-                                           name="stok"
-                                           class="form-control mb-3"
-                                           value="{{ $item->stok }}"
-                                           required>
-
-                                    <textarea
-                                        name="deskripsi"
-                                        class="form-control"
-                                        rows="3"
-                                        required>{{ $item->deskripsi }}</textarea>
-
-                                </div>
-
-                                <div class="modal-footer">
-
-                                    <button type="button"
-                                            class="btn btn-secondary"
-                                            data-bs-dismiss="modal">
-                                        Batal
-                                    </button>
-
-                                    <button type="submit"
-                                            class="btn btn-primary">
-                                        Update
-                                    </button>
-
-                                </div>
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin hapus data?')">
+                                    🗑️ Hapus
+                                </button>
 
                             </form>
+
+                        </td>
+
+                    </tr>
+
+                    <!-- MODAL EDIT -->
+                    <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1">
+
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+
+                                <form action="{{ route('products.update',$item->id) }}" method="POST">
+
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="modal-header">
+                                        <h5>Edit Produk</h5>
+
+                                        <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <input
+                                            type="text"
+                                            name="nama_barang"
+                                            class="form-control mb-3"
+                                            value="{{ $item->nama_barang }}"
+                                            required>
+
+                                        <input
+                                            type="number"
+                                            name="harga"
+                                            class="form-control mb-3"
+                                            value="{{ $item->harga }}"
+                                            required>
+
+                                        <input
+                                            type="number"
+                                            name="stok"
+                                            class="form-control mb-3"
+                                            value="{{ $item->stok }}"
+                                            required>
+
+                                        <textarea
+                                            name="deskripsi"
+                                            class="form-control"
+                                            rows="3"
+                                            required>{{ $item->deskripsi }}</textarea>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">
+                                            Batal
+                                        </button>
+
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary">
+                                            Update
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
-
                 @empty
 
-                <tr>
-                    <td colspan="6" class="text-center py-4">
-                        Belum ada data barang
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            Belum ada data barang
+                        </td>
+                    </tr>
 
                 @endforelse
 
@@ -264,72 +331,76 @@ body{
             </table>
 
         </div>
+
     </div>
 
 </div>
 
 <!-- MODAL TAMBAH -->
-
 <div class="modal fade" id="modalTambah">
 
     <div class="modal-dialog">
 
         <div class="modal-content">
 
-            <form action="{{ route('products.store') }}"
-                  method="POST">
+            <form action="{{ route('products.store') }}" method="POST">
 
                 @csrf
 
                 <div class="modal-header">
-
                     <h5>Tambah Item</h5>
 
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal">
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
                     </button>
-
                 </div>
 
                 <div class="modal-body">
 
-                    <input type="text"
-                           name="nama_barang"
-                           class="form-control mb-3"
-                           placeholder="Nama Barang"
-                           required>
+                    <input
+                        type="text"
+                        name="nama_barang"
+                        class="form-control mb-3"
+                        placeholder="Nama Barang"
+                        required>
 
-                    <input type="number"
-                           name="harga"
-                           class="form-control mb-3"
-                           placeholder="Harga"
-                           required>
+                    <input
+                        type="number"
+                        name="harga"
+                        class="form-control mb-3"
+                        placeholder="Harga"
+                        required>
 
-                    <input type="number"
-                           name="stok"
-                           class="form-control mb-3"
-                           placeholder="Stok"
-                           required>
+                    <input
+                        type="number"
+                        name="stok"
+                        class="form-control mb-3"
+                        placeholder="Stok"
+                        required>
 
-                    <textarea name="deskripsi"
-                              class="form-control"
-                              rows="3"
-                              placeholder="Deskripsi"
-                              required></textarea>
+                    <textarea
+                        name="deskripsi"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Deskripsi"
+                        required></textarea>
 
                 </div>
 
                 <div class="modal-footer">
 
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
                         Batal
                     </button>
 
-                    <button type="submit"
-                            class="btn btn-primary">
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
                         Simpan
                     </button>
 

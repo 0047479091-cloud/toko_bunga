@@ -6,17 +6,11 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    /**
-     * Menampilkan halaman login
-     */
     public function showLoginForm()
     {
         return view('login');
     }
 
-    /**
-     * Proses Login
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -34,13 +28,10 @@ class AuthController extends Controller
         return back()
             ->withInput()
             ->withErrors([
-                'email' => 'Email atau password salah!',
+                'email' => 'Email atau Password salah!',
             ]);
     }
 
-    /**
-     * Logout
-     */
     public function logout(Request $request)
     {
         auth()->logout();
