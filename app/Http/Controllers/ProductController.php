@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductController extends Controller
 {
@@ -59,4 +60,13 @@ class ProductController extends Controller
             ->route('products.index')
             ->with('success', 'Data berhasil dihapus');
     }
+
+    public function generatePDF()
+{
+    $products = Product::all();
+
+    $pdf = Pdf::loadView('products.pdf', compact('products'));
+
+    return $pdf->stream('Laporan-Data-Product-MyFlorist.pdf');
+}
 }
