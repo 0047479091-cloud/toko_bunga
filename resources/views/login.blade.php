@@ -52,11 +52,11 @@
             </h2>
 
             <!-- Error -->
-            @if($errors->any())
-                <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
-                    {{ $errors->first() }}
-                </div>
-            @endif
+            @if(isset($errors) && $errors->any())
+    <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
+        {{ $errors->first() }}
+    </div>
+@endif
 
             <form action="{{ route('login.process') }}" method="POST">
 
