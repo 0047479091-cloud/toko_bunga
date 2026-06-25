@@ -12,4 +12,9 @@ class Product extends Model
         'stok',
         'deskripsi'
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

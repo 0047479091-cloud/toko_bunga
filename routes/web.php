@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])
     ->name('login');
@@ -15,8 +16,17 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::middleware('auth')->group(function () {
 
+    // Produk
     Route::resource('products', ProductController::class);
 
     Route::get('/products-pdf', [ProductController::class, 'generatePDF'])
         ->name('products.pdf');
+
+    // Transaksi
+    Route::get('/transactions', [TransactionController::class, 'index'])
+        ->name('transactions.index');
+
+    Route::post('/transactions', [TransactionController::class, 'store'])
+        ->name('transactions.store');
+
 });

@@ -82,15 +82,15 @@ body{
 
     <div class="text-center mb-4">
 
-        <h1 class="title">
-            🌷 Iin's Bouquet
-        </h1>
+    <h1 class="title">
+        🌷 Iin's Bouquet
+    </h1>
 
-        <p class="subtitle">
-            Fresh Flowers • Beautiful Moments • Made With Love
-        </p>
+    <p class="subtitle">
+        Fresh Flowers • Beautiful Moments • Made With Love
+    </p>
 
-    </div>
+</div>
 
     @if(session('success'))
 
@@ -132,40 +132,52 @@ body{
 
         <div class="d-flex justify-content-between align-items-center mb-3">
 
-            <h4>
-                📦 Data Produk
-            </h4>
+    <div class="d-flex align-items-center">
 
-            <div class="d-flex gap-2">
+        <h4 class="mb-0">
+            📦 Data Produk
+        </h4>
 
-                <button
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTambah">
+        <a href="{{ route('transactions.index') }}"
+           class="text-decoration-none ms-3 fw-semibold"
+           style="color:#e75480;font-size:20px;">
 
-                    + Tambah Item
+            🛒 Transaksi
 
-                </button>
+        </a>
 
-                <a href="{{ route('products.pdf') }}"
-                   target="_blank"
-                   class="btn btn-danger">
+    </div>
 
-                    🧾 Simpan PDF
+    <div class="d-flex gap-2">
 
-                </a>
+        <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#modalTambah">
 
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
+            + Tambah Item
 
-                    <button class="btn btn-dark">
-                        Logout
-                    </button>
-                </form>
+        </button>
 
-            </div>
+        <a href="{{ route('products.pdf') }}"
+           target="_blank"
+           class="btn btn-danger">
 
-        </div>
+            🧾 Simpan PDF
+
+        </a>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button class="btn btn-dark">
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+</div>
 
         <table class="table table-hover table-bordered">
 
