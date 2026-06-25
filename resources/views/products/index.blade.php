@@ -145,6 +145,11 @@ body{
             🛒 Transaksi
 
         </a>
+        <a href="{{ route('history.index') }}"
+            class="btn btn-outline-secondary">
+            
+             🕘 Riwayat
+        </a>
 
     </div>
 

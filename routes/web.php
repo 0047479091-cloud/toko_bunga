@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\HistoryController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])
     ->name('login');
@@ -29,4 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/transactions', [TransactionController::class, 'store'])
         ->name('transactions.store');
 
+    Route::get('/history', [HistoryController::class, 'index'])
+        ->name('history.index');
 });
